@@ -19,6 +19,9 @@
 		296246BF29D385760092BBE6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		296246C129D385780092BBE6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		296246C429D385780092BBE6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		296246CB29D4D9730092BBE6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		296246CC29D4DA3E0092BBE6 /* HealthCareRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HealthCareRelease.entitlements; sourceTree = "<group>"; };
+		296246CD29D4DF7D0092BBE6 /* HealthCareDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HealthCareDebug.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +54,9 @@
 		296246BC29D385760092BBE6 /* HealthCare */ = {
 			isa = PBXGroup;
 			children = (
+				296246CD29D4DF7D0092BBE6 /* HealthCareDebug.entitlements */,
+				296246CC29D4DA3E0092BBE6 /* HealthCareRelease.entitlements */,
+				296246CB29D4D9730092BBE6 /* Info.plist */,
 				296246BD29D385760092BBE6 /* HealthCareApp.swift */,
 				296246BF29D385760092BBE6 /* ContentView.swift */,
 				296246C129D385780092BBE6 /* Assets.xcassets */,
@@ -264,15 +270,20 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = HealthCare/HealthCareDebug.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"HealthCare/Preview Content\"";
 				DEVELOPMENT_TEAM = TU72F4GFFV;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = HealthCare/Info.plist;
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "\"Asdsds Asdsds Asdsds Asdsds Asdsds Asdsds Asdsds\"";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "\"Asdsds Asdsds Asdsds Asdsds Asdsds Asdsds Asdsds\"";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = healthkit;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -293,15 +304,20 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = HealthCare/HealthCareRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"HealthCare/Preview Content\"";
-				DEVELOPMENT_TEAM = TU72F4GFFV;
+				DEVELOPMENT_TEAM = BD2C3339T9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = HealthCare/Info.plist;
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "\"Asdsds Asdsds Asdsds Asdsds Asdsds Asdsds Asdsds\"";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "\"Asdsds Asdsds Asdsds Asdsds Asdsds Asdsds Asdsds\"";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = healthkit;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
