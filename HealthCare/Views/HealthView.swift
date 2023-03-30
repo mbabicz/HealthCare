@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct HealthDataView: View {
-    @StateObject var healthManager = HealthKitViewManager()
+struct HealthView: View {
+    @StateObject var healthManager = HealthKitManager()
 
     var body: some View {
         NavigationView {

@@ -8,17 +8,22 @@
 import Foundation
 import HealthKit
 
-class HealthKitViewManager: ObservableObject {
+class HealthKitManager: ObservableObject {
     
     let healthStore = HKHealthStore()
+    
+    //daily
     @Published var stepsCount = Int()
     @Published var caloriesBurned = Double()
+    
+    //7 days
     @Published var averageStepsLast7Days = Int()
     @Published var averageCaloriesBurnedLast7Days = Int()
     
+    //30 days
     @Published var averageStepsLast30Days = Int()
     @Published var averageCaloriesBurnedLast30Days = Int()
-
+    
     func fetchTodayStepsCount(completion: @escaping (Int?) -> Void) {
         let stepsQuantityType = HKQuantityType.quantityType(forIdentifier: .stepCount)!
         let calendar = Calendar.current
@@ -61,7 +66,7 @@ class HealthKitViewManager: ObservableObject {
         }
         healthStore.execute(query)
     }
-
+    
     
     func fetchTodayActiveEnergyBurned(completion: @escaping (Double?) -> Void) {
         let activeEnergyBurnedType = HKQuantityType.quantityType(forIdentifier: .activeEnergyBurned)!
@@ -101,7 +106,7 @@ class HealthKitViewManager: ObservableObject {
         }
         healthStore.execute(query)
     }
-
+    
     
     func getHealthKitData() {
         let typesToRead = Set([
@@ -124,18 +129,15 @@ class HealthKitViewManager: ObservableObject {
                     let endDate = Date()
                     let sevenDaysAgo = calendar.date(byAdding: .day, value: -7, to: endDate)!
                     let thirtyDaysAgo = calendar.date(byAdding: .day, value: -30, to: endDate)!
-                        
+                    
                     self.fetchAverageStepsCount(startDate: sevenDaysAgo, endDate: endDate) { averageSteps in
                         self.averageStepsLast7Days = averageSteps ?? 0
                         print(averageSteps!)
-
                     }
                     
                     self.fetchAverageStepsCount(startDate: thirtyDaysAgo, endDate: endDate) { averageSteps in
                         self.averageStepsLast30Days = averageSteps!
                         print(averageSteps!)
-
-
                     }
                     
                     self.fetchTodayActiveEnergyBurned { calories in
@@ -148,23 +150,21 @@ class HealthKitViewManager: ObservableObject {
                             print(averageCalories!)
                         }
                     }
-
+                    
                     self.fetchAverageActiveEnergyBurned(startDate: thirtyDaysAgo, endDate: endDate) { averageCalories in
                         DispatchQueue.main.async {
                             self.averageCaloriesBurnedLast30Days = Int(averageCalories ?? 0)
                             print(averageCalories!)
-
+                            
                         }
                     }
                 }
             } else {
-                print("Authorization failed.")
+                print("Authorization failed")
                 if let error = error {
                     print("\(error.localizedDescription)")
                 }
             }
         }
     }
-
-                                                         
-                                                         }
+}
