@@ -8,20 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		296246BE29D385760092BBE6 /* HealthCareApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296246BD29D385760092BBE6 /* HealthCareApp.swift */; };
-		296246C029D385760092BBE6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296246BF29D385760092BBE6 /* ContentView.swift */; };
 		296246C229D385780092BBE6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 296246C129D385780092BBE6 /* Assets.xcassets */; };
 		296246C529D385780092BBE6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 296246C429D385780092BBE6 /* Preview Assets.xcassets */; };
+		29B42C9D29D5C93200A85730 /* HealthKitViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B42C9C29D5C93200A85730 /* HealthKitViewManager.swift */; };
+		29B42CA129D5CBAE00A85730 /* HealthDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B42CA029D5CBAE00A85730 /* HealthDataView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		296246BA29D385760092BBE6 /* HealthCare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HealthCare.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		296246BD29D385760092BBE6 /* HealthCareApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthCareApp.swift; sourceTree = "<group>"; };
-		296246BF29D385760092BBE6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		296246C129D385780092BBE6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		296246C429D385780092BBE6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		296246CB29D4D9730092BBE6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		296246CC29D4DA3E0092BBE6 /* HealthCareRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HealthCareRelease.entitlements; sourceTree = "<group>"; };
 		296246CD29D4DF7D0092BBE6 /* HealthCareDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HealthCareDebug.entitlements; sourceTree = "<group>"; };
+		29B42C9C29D5C93200A85730 /* HealthKitViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitViewManager.swift; sourceTree = "<group>"; };
+		29B42CA029D5CBAE00A85730 /* HealthDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthDataView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,9 +60,10 @@
 				296246CC29D4DA3E0092BBE6 /* HealthCareRelease.entitlements */,
 				296246CB29D4D9730092BBE6 /* Info.plist */,
 				296246BD29D385760092BBE6 /* HealthCareApp.swift */,
-				296246BF29D385760092BBE6 /* ContentView.swift */,
 				296246C129D385780092BBE6 /* Assets.xcassets */,
 				296246C329D385780092BBE6 /* Preview Content */,
+				29B42C9C29D5C93200A85730 /* HealthKitViewManager.swift */,
+				29B42CA029D5CBAE00A85730 /* HealthDataView.swift */,
 			);
 			path = HealthCare;
 			sourceTree = "<group>";
@@ -143,7 +146,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				296246C029D385760092BBE6 /* ContentView.swift in Sources */,
+				29B42C9D29D5C93200A85730 /* HealthKitViewManager.swift in Sources */,
+				29B42CA129D5CBAE00A85730 /* HealthDataView.swift in Sources */,
 				296246BE29D385760092BBE6 /* HealthCareApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
