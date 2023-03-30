@@ -11,6 +11,7 @@
 		296246C229D385780092BBE6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 296246C129D385780092BBE6 /* Assets.xcassets */; };
 		296246C529D385780092BBE6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 296246C429D385780092BBE6 /* Preview Assets.xcassets */; };
 		2973E75629D5F8C70071E805 /* StepsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2973E75529D5F8C70071E805 /* StepsView.swift */; };
+		2973E75829D5FA7D0071E805 /* CaloriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2973E75729D5FA7D0071E805 /* CaloriesView.swift */; };
 		29B42C9D29D5C93200A85730 /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B42C9C29D5C93200A85730 /* HealthKitManager.swift */; };
 		29B42CA129D5CBAE00A85730 /* HealthDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B42CA029D5CBAE00A85730 /* HealthDataView.swift */; };
 /* End PBXBuildFile section */
@@ -24,6 +25,7 @@
 		296246CC29D4DA3E0092BBE6 /* HealthCareRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HealthCareRelease.entitlements; sourceTree = "<group>"; };
 		296246CD29D4DF7D0092BBE6 /* HealthCareDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HealthCareDebug.entitlements; sourceTree = "<group>"; };
 		2973E75529D5F8C70071E805 /* StepsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepsView.swift; sourceTree = "<group>"; };
+		2973E75729D5FA7D0071E805 /* CaloriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaloriesView.swift; sourceTree = "<group>"; };
 		29B42C9C29D5C93200A85730 /* HealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
 		29B42CA029D5CBAE00A85730 /* HealthDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthDataView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -83,6 +85,7 @@
 			children = (
 				29B42CA029D5CBAE00A85730 /* HealthDataView.swift */,
 				2973E75529D5F8C70071E805 /* StepsView.swift */,
+				2973E75729D5FA7D0071E805 /* CaloriesView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -157,6 +160,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2973E75829D5FA7D0071E805 /* CaloriesView.swift in Sources */,
 				2973E75629D5F8C70071E805 /* StepsView.swift in Sources */,
 				29B42C9D29D5C93200A85730 /* HealthKitManager.swift in Sources */,
 				29B42CA129D5CBAE00A85730 /* HealthDataView.swift in Sources */,

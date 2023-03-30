@@ -13,6 +13,5 @@ struct HealthCareApp: App {
         WindowGroup {
             HealthDataView()
         }
-        
     }
 }
