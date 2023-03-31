@@ -15,6 +15,7 @@ class HealthKitManager: ObservableObject {
     //daily
     @Published var stepsCount = Int()
     @Published var caloriesBurned = Double()
+    @Published var sleepTimeToday = String()
     
     //7 days
     @Published var averageStepsLast7Days = Int()
@@ -107,7 +108,52 @@ class HealthKitManager: ObservableObject {
         healthStore.execute(query)
     }
     
+
+    func fetchTodaySleepTime(completion: @escaping (Double?) -> Void) {
+        
+        guard let sleepType = HKObjectType.categoryType(forIdentifier: .sleepAnalysis) else {
+            completion(nil)
+            return
+        }
+                
+        healthStore.requestAuthorization(toShare: nil, read: [sleepType]) { (success, error) in
+            guard success else {
+                completion(nil)
+                return
+            }
+            
+            let now = Date()
+            let calendar = Calendar.current
+            let startOfDay = calendar.startOfDay(for: now)
+            let endOfDay = calendar.date(byAdding: .day, value: 1, to: startOfDay)!
+            
+            let predicate = HKQuery.predicateForSamples(withStart: startOfDay, end: endOfDay, options: .strictStartDate)
+            
+            let query = HKSampleQuery(sampleType: sleepType, predicate: predicate, limit: HKObjectQueryNoLimit, sortDescriptors: nil) { (query, samples, error) in
+                guard let samples = samples as? [HKCategorySample], error == nil else {
+                    completion(nil)
+                    return
+                }
+                
+                var totalTimeAsleep = 0.0
+                
+                for sample in samples {
+                    let startDate = sample.startDate
+                    let endDate = sample.endDate
+                    let duration = endDate.timeIntervalSince(startDate)
+                    
+                    totalTimeAsleep += duration
+                }
+                
+                completion(totalTimeAsleep)
+            }
+            
+            self.healthStore.execute(query)
+        }
+    }
+
     
+    //MARK: getHealthKitData
     func getHealthKitData() {
         let typesToRead = Set([
             HKObjectType.quantityType(forIdentifier: .activeEnergyBurned)!,
@@ -132,12 +178,10 @@ class HealthKitManager: ObservableObject {
                     
                     self.fetchAverageStepsCount(startDate: sevenDaysAgo, endDate: endDate) { averageSteps in
                         self.averageStepsLast7Days = averageSteps ?? 0
-                        print(averageSteps!)
                     }
                     
                     self.fetchAverageStepsCount(startDate: thirtyDaysAgo, endDate: endDate) { averageSteps in
                         self.averageStepsLast30Days = averageSteps!
-                        print(averageSteps!)
                     }
                     
                     self.fetchTodayActiveEnergyBurned { calories in
@@ -158,6 +202,13 @@ class HealthKitManager: ObservableObject {
                             
                         }
                     }
+                    
+                    self.fetchTodaySleepTime { sleepTime in
+                        DispatchQueue.main.async {
+                            let sleepTimeString = sleepTime.map { self.timeString(from: $0) } ?? "00 hours 00"
+                            self.sleepTimeToday = sleepTimeString
+                        }
+                    }
                 }
             } else {
                 print("Authorization failed")
@@ -166,5 +217,12 @@ class HealthKitManager: ObservableObject {
                 }
             }
         }
+    }
+    
+    func timeString(from seconds: Double) -> String {
+        let totalSeconds = Int(seconds)
+        let hours = totalSeconds / 3600
+        let minutes = (totalSeconds % 3600) / 60
+        return String(format: hours >= 10 ? "%02d hours %02d minutes" : "%2d hours %02d minutes" , hours, minutes)
     }
 }

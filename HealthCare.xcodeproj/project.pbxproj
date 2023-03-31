@@ -12,6 +12,7 @@
 		296246C529D385780092BBE6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 296246C429D385780092BBE6 /* Preview Assets.xcassets */; };
 		2973E75629D5F8C70071E805 /* StepsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2973E75529D5F8C70071E805 /* StepsView.swift */; };
 		2973E75829D5FA7D0071E805 /* CaloriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2973E75729D5FA7D0071E805 /* CaloriesView.swift */; };
+		2973E75A29D603F30071E805 /* SleepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2973E75929D603F30071E805 /* SleepView.swift */; };
 		29B42C9D29D5C93200A85730 /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B42C9C29D5C93200A85730 /* HealthKitManager.swift */; };
 		29B42CA129D5CBAE00A85730 /* HealthDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B42CA029D5CBAE00A85730 /* HealthDataView.swift */; };
 /* End PBXBuildFile section */
@@ -26,6 +27,7 @@
 		296246CD29D4DF7D0092BBE6 /* HealthCareDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HealthCareDebug.entitlements; sourceTree = "<group>"; };
 		2973E75529D5F8C70071E805 /* StepsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepsView.swift; sourceTree = "<group>"; };
 		2973E75729D5FA7D0071E805 /* CaloriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaloriesView.swift; sourceTree = "<group>"; };
+		2973E75929D603F30071E805 /* SleepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepView.swift; sourceTree = "<group>"; };
 		29B42C9C29D5C93200A85730 /* HealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
 		29B42CA029D5CBAE00A85730 /* HealthDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthDataView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -86,6 +88,7 @@
 				29B42CA029D5CBAE00A85730 /* HealthDataView.swift */,
 				2973E75529D5F8C70071E805 /* StepsView.swift */,
 				2973E75729D5FA7D0071E805 /* CaloriesView.swift */,
+				2973E75929D603F30071E805 /* SleepView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -162,6 +165,7 @@
 			files = (
 				2973E75829D5FA7D0071E805 /* CaloriesView.swift in Sources */,
 				2973E75629D5F8C70071E805 /* StepsView.swift in Sources */,
+				2973E75A29D603F30071E805 /* SleepView.swift in Sources */,
 				29B42C9D29D5C93200A85730 /* HealthKitManager.swift in Sources */,
 				29B42CA129D5CBAE00A85730 /* HealthDataView.swift in Sources */,
 				296246BE29D385760092BBE6 /* HealthCareApp.swift in Sources */,

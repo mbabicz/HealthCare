@@ -16,6 +16,7 @@ struct HealthDataView: View {
                 VStack{
                     StepsView()
                     CaloriesView()
+                    SleepView()
                 }
             }
             .navigationBarTitle(Text("Health Data"))
