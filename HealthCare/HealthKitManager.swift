@@ -20,10 +20,14 @@ class HealthKitManager: ObservableObject {
     //7 days
     @Published var averageStepsLast7Days = Int()
     @Published var averageCaloriesBurnedLast7Days = Int()
+    @Published var averageSleepTimeLast7Days = String()
+
     
     //30 days
     @Published var averageStepsLast30Days = Int()
     @Published var averageCaloriesBurnedLast30Days = Int()
+    @Published var averageSleepTimeLast30Days = String()
+
     
     func fetchTodayStepsCount(completion: @escaping (Int?) -> Void) {
         let stepsQuantityType = HKQuantityType.quantityType(forIdentifier: .stepCount)!
@@ -151,6 +155,52 @@ class HealthKitManager: ObservableObject {
             self.healthStore.execute(query)
         }
     }
+    
+    func fetchAverageSleepTime(startDate: Date, endDate: Date, completion: @escaping (Double?) -> Void) {
+        guard let sleepType = HKObjectType.categoryType(forIdentifier: .sleepAnalysis) else {
+            completion(nil)
+            return
+        }
+        
+        healthStore.requestAuthorization(toShare: nil, read: [sleepType]) { (success, error) in
+            guard success else {
+                completion(nil)
+                return
+            }
+            
+            let calendar = Calendar.current
+            let startOfDay = calendar.startOfDay(for: startDate)
+            let endOfDay = calendar.startOfDay(for: calendar.date(byAdding: .day, value: 1, to: endDate)!)
+            
+            let predicate = HKQuery.predicateForSamples(withStart: startOfDay, end: endOfDay, options: .strictStartDate)
+            
+            let query = HKSampleQuery(sampleType: sleepType, predicate: predicate, limit: HKObjectQueryNoLimit, sortDescriptors: nil) { (query, samples, error) in
+                guard let samples = samples as? [HKCategorySample], error == nil else {
+                    completion(nil)
+                    return
+                }
+                
+                var totalTimeAsleep = 0.0
+                var totalSamples = 0
+                
+                for sample in samples {
+                    let startDate = sample.startDate
+                    let endDate = sample.endDate
+                    let duration = endDate.timeIntervalSince(startDate)
+                    
+                    totalTimeAsleep += duration
+                    totalSamples += 1
+                }
+                
+                let averageTimeAsleep = totalSamples > 0 ? totalTimeAsleep / Double(totalSamples) : 0
+                
+                completion(averageTimeAsleep)
+            }
+            
+            self.healthStore.execute(query)
+        }
+    }
+
 
     
     //MARK: getHealthKitData
@@ -199,7 +249,6 @@ class HealthKitManager: ObservableObject {
                         DispatchQueue.main.async {
                             self.averageCaloriesBurnedLast30Days = Int(averageCalories ?? 0)
                             print(averageCalories!)
-                            
                         }
                     }
                     
@@ -209,6 +258,21 @@ class HealthKitManager: ObservableObject {
                             self.sleepTimeToday = sleepTimeString
                         }
                     }
+                    
+                    self.fetchAverageSleepTime(startDate: sevenDaysAgo, endDate: endDate) { averageSleepTime in
+                        DispatchQueue.main.async {
+                            let sleepTimeString = averageSleepTime.map { self.timeString(from: $0) } ?? "00 hours 00"
+                            self.averageSleepTimeLast7Days = sleepTimeString
+                        }
+                    }
+                    
+                    self.fetchAverageSleepTime(startDate: thirtyDaysAgo, endDate: endDate) { averageSleepTime in
+                        DispatchQueue.main.async {
+                            let sleepTimeString = averageSleepTime.map { self.timeString(from: $0) } ?? "00 hours 00"
+                            self.averageSleepTimeLast30Days = sleepTimeString
+                        }
+                    }
+                    
                 }
             } else {
                 print("Authorization failed")

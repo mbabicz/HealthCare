@@ -37,6 +37,38 @@ struct SleepView: View {
                 .padding([.horizontal, . bottom], 10)
             }
             
+            VStack(alignment: .leading){
+                Text(healthManager.averageSleepTimeLast7Days)
+                    .font(.title)
+                    .padding(.horizontal, 10)
+                
+                ZStack{
+                    Text("Weekly average")
+                        .font(.footnote)
+                        .padding(.horizontal, 5)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(Color(red: 72/255, green: 76/255, blue: 78/255))
+                .cornerRadius(20)
+                .padding([.horizontal, . bottom], 10)
+            }
+            
+            VStack(alignment: .leading){
+                Text(healthManager.averageSleepTimeLast30Days)
+                    .font(.title)
+                    .padding(.horizontal, 10)
+                
+                ZStack{
+                    Text("Monthly average")
+                        .font(.footnote)
+                        .padding(.horizontal, 5)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(Color(red: 72/255, green: 76/255, blue: 78/255))
+                .cornerRadius(20)
+                .padding([.horizontal, . bottom], 10)
+            }
+            
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(Color(red: 32/255, green: 36/255, blue: 38/255))
