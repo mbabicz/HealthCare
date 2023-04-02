@@ -302,8 +302,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HealthCare/Info.plist;
-				INFOPLIST_KEY_NSHealthShareUsageDescription = "\"Asdsds Asdsds Asdsds Asdsds Asdsds Asdsds Asdsds\"";
-				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "\"Asdsds Asdsds Asdsds Asdsds Asdsds Asdsds Asdsds\"";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Allow this app to acces heath data.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Allow this app to update heath data.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -336,8 +336,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HealthCare/Info.plist;
-				INFOPLIST_KEY_NSHealthShareUsageDescription = "\"Asdsds Asdsds Asdsds Asdsds Asdsds Asdsds Asdsds\"";
-				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "\"Asdsds Asdsds Asdsds Asdsds Asdsds Asdsds Asdsds\"";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Allow this app to acces heath data.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Allow this app to update heath data.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

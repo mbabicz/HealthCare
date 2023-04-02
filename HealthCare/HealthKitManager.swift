@@ -112,46 +112,45 @@ class HealthKitManager: ObservableObject {
         healthStore.execute(query)
     }
     
-
     func fetchTodaySleepTime(completion: @escaping (Double?) -> Void) {
-        
+
         guard let sleepType = HKObjectType.categoryType(forIdentifier: .sleepAnalysis) else {
             completion(nil)
             return
         }
-                
+
         healthStore.requestAuthorization(toShare: nil, read: [sleepType]) { (success, error) in
             guard success else {
                 completion(nil)
                 return
             }
-            
+
             let now = Date()
             let calendar = Calendar.current
             let startOfDay = calendar.startOfDay(for: now)
             let endOfDay = calendar.date(byAdding: .day, value: 1, to: startOfDay)!
-            
+
             let predicate = HKQuery.predicateForSamples(withStart: startOfDay, end: endOfDay, options: .strictStartDate)
-            
+
             let query = HKSampleQuery(sampleType: sleepType, predicate: predicate, limit: HKObjectQueryNoLimit, sortDescriptors: nil) { (query, samples, error) in
                 guard let samples = samples as? [HKCategorySample], error == nil else {
                     completion(nil)
                     return
                 }
-                
+
                 var totalTimeAsleep = 0.0
-                
+
                 for sample in samples {
                     let startDate = sample.startDate
                     let endDate = sample.endDate
                     let duration = endDate.timeIntervalSince(startDate)
-                    
+
                     totalTimeAsleep += duration
                 }
-                
+
                 completion(totalTimeAsleep)
             }
-            
+
             self.healthStore.execute(query)
         }
     }
@@ -188,8 +187,10 @@ class HealthKitManager: ObservableObject {
                     let endDate = sample.endDate
                     let duration = endDate.timeIntervalSince(startDate)
                     
-                    totalTimeAsleep += duration
-                    totalSamples += 1
+                    if duration > 18000{
+                        totalTimeAsleep += duration
+                        totalSamples += 1
+                    }
                 }
                 
                 let averageTimeAsleep = totalSamples > 0 ? totalTimeAsleep / Double(totalSamples) : 0
@@ -200,79 +201,84 @@ class HealthKitManager: ObservableObject {
             self.healthStore.execute(query)
         }
     }
-
-
     
+   
     //MARK: getHealthKitData
     func getHealthKitData() {
         let typesToRead = Set([
             HKObjectType.quantityType(forIdentifier: .activeEnergyBurned)!,
-            HKObjectType.quantityType(forIdentifier: .stepCount)!
+            HKObjectType.quantityType(forIdentifier: .stepCount)!,
+            HKObjectType.categoryType(forIdentifier: .sleepAnalysis)!
+
         ])
         let typesToShare = Set([
             HKObjectType.quantityType(forIdentifier: .activeEnergyBurned)!,
-            HKObjectType.quantityType(forIdentifier: .stepCount)!
+            HKObjectType.quantityType(forIdentifier: .stepCount)!,
+            HKObjectType.categoryType(forIdentifier: .sleepAnalysis)!
+
+
         ])
-        
+
+
         healthStore.requestAuthorization(toShare: typesToShare, read: typesToRead) { (success, error) in
             if success {
                 DispatchQueue.main.async {
+
                     self.fetchTodayStepsCount { steps in
                         self.stepsCount = steps ?? 0
                     }
-                    
+
                     let calendar = Calendar.current
                     let endDate = Date()
                     let sevenDaysAgo = calendar.date(byAdding: .day, value: -7, to: endDate)!
                     let thirtyDaysAgo = calendar.date(byAdding: .day, value: -30, to: endDate)!
-                    
+
                     self.fetchAverageStepsCount(startDate: sevenDaysAgo, endDate: endDate) { averageSteps in
                         self.averageStepsLast7Days = averageSteps ?? 0
                     }
-                    
+
                     self.fetchAverageStepsCount(startDate: thirtyDaysAgo, endDate: endDate) { averageSteps in
                         self.averageStepsLast30Days = averageSteps!
                     }
-                    
+
                     self.fetchTodayActiveEnergyBurned { calories in
                         self.caloriesBurned = Double(calories ?? 0)
                     }
-                    
+
                     self.fetchAverageActiveEnergyBurned(startDate: sevenDaysAgo, endDate: endDate) { averageCalories in
                         DispatchQueue.main.async {
                             self.averageCaloriesBurnedLast7Days = Int(averageCalories ?? 0)
-                            print(averageCalories!)
                         }
                     }
-                    
+
                     self.fetchAverageActiveEnergyBurned(startDate: thirtyDaysAgo, endDate: endDate) { averageCalories in
                         DispatchQueue.main.async {
                             self.averageCaloriesBurnedLast30Days = Int(averageCalories ?? 0)
-                            print(averageCalories!)
+//                            print(averageCalories!)
                         }
                     }
-                    
-                    self.fetchTodaySleepTime { sleepTime in
+
+                    self.fetchTodaySleepTime() { sleepTime in
                         DispatchQueue.main.async {
-                            let sleepTimeString = sleepTime.map { self.timeString(from: $0) } ?? "00 hours 00"
+                            let sleepTimeString = sleepTime.map { self.timeString(from: $0) } ?? "00 hours 00 minutes"
                             self.sleepTimeToday = sleepTimeString
                         }
                     }
-                    
+
                     self.fetchAverageSleepTime(startDate: sevenDaysAgo, endDate: endDate) { averageSleepTime in
                         DispatchQueue.main.async {
-                            let sleepTimeString = averageSleepTime.map { self.timeString(from: $0) } ?? "00 hours 00"
+                            let sleepTimeString = averageSleepTime.map { self.timeString(from: $0) } ?? "00 hours 00 minutes"
                             self.averageSleepTimeLast7Days = sleepTimeString
                         }
                     }
-                    
+
                     self.fetchAverageSleepTime(startDate: thirtyDaysAgo, endDate: endDate) { averageSleepTime in
                         DispatchQueue.main.async {
-                            let sleepTimeString = averageSleepTime.map { self.timeString(from: $0) } ?? "00 hours 00"
+                            let sleepTimeString = averageSleepTime.map { self.timeString(from: $0) } ?? "00 hours 00 minutes"
                             self.averageSleepTimeLast30Days = sleepTimeString
                         }
                     }
-                    
+
                 }
             } else {
                 print("Authorization failed")
