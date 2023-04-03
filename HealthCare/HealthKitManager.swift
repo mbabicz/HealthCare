@@ -124,10 +124,11 @@ class HealthKitManager: ObservableObject {
                 completion(nil)
                 return
             }
-
+            
             let now = Date()
             let calendar = Calendar.current
             let startOfDay = calendar.startOfDay(for: now)
+
             let endOfDay = calendar.date(byAdding: .day, value: 1, to: startOfDay)!
 
             let predicate = HKQuery.predicateForSamples(withStart: startOfDay, end: endOfDay, options: .strictStartDate)
@@ -147,15 +148,14 @@ class HealthKitManager: ObservableObject {
 
                     totalTimeAsleep += duration
                 }
-
                 completion(totalTimeAsleep)
             }
-
             self.healthStore.execute(query)
         }
     }
     
     func fetchAverageSleepTime(startDate: Date, endDate: Date, completion: @escaping (Double?) -> Void) {
+        
         guard let sleepType = HKObjectType.categoryType(forIdentifier: .sleepAnalysis) else {
             completion(nil)
             return
@@ -254,7 +254,6 @@ class HealthKitManager: ObservableObject {
                     self.fetchAverageActiveEnergyBurned(startDate: thirtyDaysAgo, endDate: endDate) { averageCalories in
                         DispatchQueue.main.async {
                             self.averageCaloriesBurnedLast30Days = Int(averageCalories ?? 0)
-//                            print(averageCalories!)
                         }
                     }
 

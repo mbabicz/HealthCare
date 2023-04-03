@@ -15,8 +15,8 @@ struct HealthDataView: View {
             ScrollView{
                 VStack{
                     StepsView()
-                    CaloriesView()
                     SleepView()
+                    CaloriesView()
                 }
             }
             .navigationBarTitle(Text("Health Data"))
